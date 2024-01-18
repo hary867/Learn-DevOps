@@ -1,0 +1,3 @@
+automating the deployment of network using terraform in GCP
+
+creating a managementnet.tf file and with in that.. Terraform resources "google_compute_network" & "google_compute_subnetwork" are used  

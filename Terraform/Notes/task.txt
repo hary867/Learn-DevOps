@@ -1,0 +1,13 @@
+task
+
+opened the aws command line interface guide on aws
+installed the msi installer as per intructions and ran it, thats it, aws-cli is installed, check 'aws --version' to know whether its installed or not 
+
+getting started with terraform.... terraform cloud  -> docs -> intro to terraform -> use cases -> multi cloud deployment -> deploy federated multi cloud kubernetes cluster
+to know resources we can control on aws through terraform...... browser -> terraform aws registry -> documentation 
+
+created a terraform file using the module from the terraform aws registry documentation in the section of aws provider configuration & also used resource of aws to create an AMI from snapshot
+
+
+
+

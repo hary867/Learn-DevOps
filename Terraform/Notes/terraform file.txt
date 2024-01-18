@@ -1,0 +1,91 @@
+terraform file & output of terraform apply
+
+$ terraform apply
+aws_ami.example: Refreshing state... [id=ami-0884e1c036b159c9b]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # aws_ami.example must be replaced
+-/+ resource "aws_ami" "example" {
+      ~ arn                  = "arn:aws:ec2:eu-north-1::image/ami-0884e1c036b159c9b" -> (known after apply)
+      - boot_mode            = "uefi-preferred" -> null # forces replacement
+      - ena_support          = false -> null
+      ~ hypervisor           = "xen" -> (known after apply)
+      ~ id                   = "ami-0884e1c036b159c9b" -> (known after apply)
+      ~ image_location       = "461939438101/terraform-example" -> (known after apply)
+      + image_owner_alias    = (known after apply)
+      ~ image_type           = "machine" -> (known after apply)
+      + manage_ebs_snapshots = (known after apply)
+        name                 = "terraform-example"
+      ~ owner_id             = "461939438101" -> (known after apply)
+      + platform             = (known after apply)
+      ~ platform_details     = "Linux/UNIX" -> (known after apply)
+      ~ public               = false -> (known after apply)
+      ~ root_snapshot_id     = "snap-046488a681f71ab82" -> (known after apply)
+      - tags                 = {} -> null
+      ~ tags_all             = {} -> (known after apply)
+      ~ usage_operation      = "RunInstances" -> (known after apply)
+        # (5 unchanged attributes hidden)
+
+      - ebs_block_device {
+          - delete_on_termination = true -> null
+          - device_name           = "/dev/xvda" -> null
+          - encrypted             = false -> null
+          - iops                  = 0 -> null
+          - snapshot_id           = "snap-046488a681f71ab82" -> null
+          - throughput            = 0 -> null
+          - volume_size           = 8 -> null
+          - volume_type           = "standard" -> null
+        }
+      + ebs_block_device {
+          + delete_on_termination = true
+          + device_name           = "/dev/xvda"
+          + snapshot_id           = "snap-046488a681f71ab82"
+          + throughput            = (known after apply)
+          + volume_size           = 8
+          + volume_type           = "standard"
+        }
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_ami.example: Destroying... [id=ami-0884e1c036b159c9b]
+aws_ami.example: Destruction complete after 6s
+aws_ami.example: Creating...
+aws_ami.example: Creation complete after 6s [id=ami-0042c63fda47f4e80]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+provider "aws" {
+  region     = "eu-north-1"
+  access_key = "AKIAWXDN4OIKSMZN5YHT"
+  secret_key = "dZfVnlK/Mps7mj3HT/+uRN0qalBPU7uOGTGUkX4y"
+}
+resource "aws_ami" "example" {
+  name                = "terraform-example"
+  virtualization_type = "hvm"
+  root_device_name    = "/dev/xvda"
+  imds_support        = "v2.0" # Enforce usage of IMDSv2. You can safely remove this line if your application explicitly doesn't support it.
+  ebs_block_device {
+    device_name = "/dev/xvda"
+    snapshot_id = "snap-046488a681f71ab82"
+    volume_size = 8
+  }
+}
+
+
+
+

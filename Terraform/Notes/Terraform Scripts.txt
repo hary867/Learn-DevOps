@@ -1,0 +1,74 @@
+Terraform Scripts
+
+resource"github_repository" "example" {
+  name = "repo2"
+  description = "copy of repo1"
+  is_template = true
+   template {
+    owner                = "hary867"
+    repository           = "repo1"
+    include_all_branches = true
+  }
+ }
+
+resource "github_branch" "develop" {
+  repository = "repo1"
+  branch     = "develop"
+}
+resource "github_branch_protection" "example" {
+  repository_id = github_repository.example.node_id
+
+ pattern          = "main"
+
+
+  required_pull_request_reviews {
+    #dismiss_stale_reviews  = true
+    require_code_owner_reviews = true
+    required_approving_review_count = 3
+    require_last_push_approval = true
+  }
+}
+
+
+# Repository creation
+resource "github_repository" "example" {
+  name        = "my-repo"
+  description = "My GitHub repository"
+}
+
+# First branch creation
+resource "github_branch" "main" {
+  repository = github_repository.example.name
+  branch     = "main"
+}
+
+# Second branch creation
+resource "github_branch" "feature" {
+  repository = github_repository.example.name
+  branch     = "feature-branch"
+}
+
+resource "github_team_members" "some_team_members" {
+ team_id  = github_team.some_team.id
+
+ members {
+   username = "hary899"
+   role     = "member"
+ }
+}
+resource "github_repository" "some_repo2" {
+  name = "some-repo4"
+}
+resource "github_team_repository" "some_team_repo2" {
+  team_id    = github_team.some_team.id
+  repository = github_repository.some_repo2.name
+}
+resource "github_repository" "some_repo3" {
+  name = "some-repo5"
+}
+resource "github_team_repository" "some_team_repo3" {
+  team_id    = github_team.some_team.id
+  repository = github_repository.some_repo3.name
+}
+
+

@@ -1,0 +1,6 @@
+TO DO 
+
+terraform  -  creating aws vpc 
+              kubernetes GKE labs
+			  eks & aks  if exits ( before do manual eks & aks ) 
+			  pipelines execution 

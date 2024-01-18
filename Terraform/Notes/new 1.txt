@@ -1,0 +1,39 @@
+provider "github" {
+  token = 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
+}
+
+resource "github_actions_workflow" "example" {
+  repository = "hary867/Capgemini"  # target repository name
+
+  for_each = {
+    "pipeline1" = " hary867/eks-gca/.github/workflows/terraform-pipeline-staging.yaml"  # name of pipeline and its path in the source repo
+  }
+
+  name = pipe.yaml
+  content = terraform-pipeline-staging.yaml(hary867/eks-gca/.github/workflows/terraform-pipeline-staging.yaml)
+}
+
+
+
+resource "github_repository_file" "readfile" {
+  repository = "hary867/semple"
+  branch     = "main"
+  file  = "README.md"
+  content    = "sample cndcn"
+}
+-----------------------
+
+resource "github_repository" "semple" {
+  name        = "semple"
+  description = "My  codebase"
+
+  visibility = "public"
+  auto_init = true
+}
+resource "github_repository_pull_request" "sample" {
+    base_repository = "semple"
+    base_ref        = "main"
+    head_ref        = "scem"
+    title           = "My newest feature"
+    body            = "This will change everything"
+}

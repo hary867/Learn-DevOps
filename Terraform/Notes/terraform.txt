@@ -1,0 +1,94 @@
+Terraform - Ned Bellavance ( Plural Sight ) 
+
+imperative - giving all the necessary code to get the output
+declarative - just giving information necessary for the output & softwarre does it for us
+idempotent - triggering the task only when there is some change in code/configuration
+push/pull - ?
+
+
+we have to set path variable for terraform after installation
+and to use it, we have to run 'terraform' command, it gives the output of all potential commands we can use on terraform.
+
+terraform executable 
+terraform files
+terraform plugins 
+teraaform state
+
+we are now conecting to aws using terraforom, to connect aws, we need credentials, credentials should not be stored in normal files, so terraform uses varaible files where it stores all the information of configuration
+aws is called the provider for terraform, so it needs to provide some information to connect, read the terraform documentation about its providers so thatyou get an idea of the providers for terrraform
+
+syntax for variables -  //  varaible "varaible name" {}  // to access it, we have to use var.variablename
+values to the variables can be given in .tfvars file.
+
+generally a terraform file consists of varibles, provider, data, resources,provisioner, output etc..
+
+'terraform init' command is used to download the plugin related to provider.
+In here, we are using aws provider, so if we run 'terraform init' command, terraform automatically downloads aws plugin.
+
+'terraform plan' command will present you the plan of what it is going to do from the configuration you have given, it will also look at the configuration files in the current directory and load the varibles given in tfvars file to the configuration file, 
+ 
+'terraform plan -out m3.tfplan' command will save the terraform plan to m3.tfplan file
+
+'terraform apply m3.tfplan' command will deploy the configuration file.
+
+'terraform.tfstate' file will automatically be created and stores the current state of configuration file in to this file.
+
+'terraform destroy' command will destroy all the stuff it created 
+
+------------------------------------------------------------
+
+Terraform CLI set up 
+
+create AWS account & generate accesskey and secret key and configure them in your local so that terraform can connect to AWS using them 
+
+open powershell.. run command aws configure --profile deep-dive .. it asks for access key & secret key & region, give all those 
+now, set AWS one profile with the command $env:AWS_PROFILE="deep-dive" ( for linux and mac, this command will be different& i.e export AWS_PROFILE=deep-dive )                  
+write a terraform resources file, terraform vars file & varaible usage file  to create two public & private subnets ( the file is at 1min- reviewing network config section Ned bellavance ) 
+( rememeber terraform file means .tf )
+
+
+-------------------------------------------------------------
+https://www.pluralsight.com/courses/git-branches-working
+
+craig golightly
+
+he has one existing code repository and the one created above ... both opened on vs code IDE
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Terraform interview based 
+
+what we did on terraform - imported existing infrastructure, trouble shoot erros, ci/cd pipeline integration, configuration management 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
